@@ -122,7 +122,7 @@ code {
   color: #fff;
   padding: 10px 18px 12px;
   text-decoration: none;
-  border-left: 4px solid transparent;
+  border-left: 3px solid transparent;
   font-weight: 500;
   width: 100%;
 }
@@ -130,7 +130,7 @@ code {
 .nav__link_active {
   color: #22CBF5;
   background: rgba(55, 58, 66, 0.56);
-  border-left: 4px solid #22CBF5;
+  border-left: 3px solid #22CBF5;
 }
 
 .form {
