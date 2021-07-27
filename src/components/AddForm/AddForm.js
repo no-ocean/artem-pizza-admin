@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
+import { postData } from "../../api/api";
 
 const schema = yup.object().shape({
 	id: yup.string().required("Введите ID"),
@@ -17,12 +18,14 @@ const AddForm = () => {
 
 	console.log(errors)
 
-	const onSubmit = (data) => {
-		console.log(data)
-	};
+	const onSubmit = handleSubmit( async (data) => {
+        console.log(data)
+        const json = await postData(data, "ingredients");
+		console.log(json)
+	});
 
 	return (
-        <form onSubmit={handleSubmit(onSubmit)} className="form">
+        <form onSubmit={onSubmit} className="form">
             <div className="mb-10">
                 <label htmlFor="price">
                     ID &nbsp;

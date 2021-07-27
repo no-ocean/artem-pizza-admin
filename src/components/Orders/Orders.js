@@ -11,7 +11,7 @@ const Orders = () => {
     useEffect(() => {
         const loadData = async () => {
             try {
-                const json = await getData("orders");
+                const json = await getData("v1", "orders");
                 setData(json);
                 setIsLoading(false);
             } catch(error) {
