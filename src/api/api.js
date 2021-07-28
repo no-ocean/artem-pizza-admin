@@ -10,13 +10,22 @@ export const getData = (version, value) => {
     )
 }
 
-export const postData = (data, value) => {
-    return fetch(`http://localhost:4000/v1/${value}`, {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-            "Accept": "application/json",
-            "Content-type": "application/json; charset=UTF-8"
+export const postData = (data) => {
+    const formData = new FormData();
+
+    for(let key in data) {
+        if( key === "image") {
+            formData.append(key, data[key][0], data[key][0].name)
+        } else if (key === "thumbnail") {
+            formData.append(key, data[key][0], data[key][0].name)
         }
+        else {
+            formData.append(key, data[key])
+        }  
+    }
+
+    return fetch("//localhost:4000/v1/ingredients", {
+        method: "POST",
+        body: formData,
     }).then(res => res.json());
 }
