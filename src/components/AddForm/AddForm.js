@@ -18,14 +18,12 @@ const AddForm = () => {
 
 	console.log(errors)
 
-	const onSubmit = handleSubmit( async (data) => {
-        console.log(data)
-        const json = await postData(data, "ingredients");
-		console.log(json)
-	});
+	const onSubmit = async (data) => {
+        await postData(data);
+	};
 
 	return (
-        <form onSubmit={onSubmit} className="form">
+        <form onSubmit={handleSubmit(onSubmit)} className="form">
             <div className="mb-10">
                 <label htmlFor="price">
                     ID &nbsp;
@@ -77,21 +75,21 @@ const AddForm = () => {
                 <span className="subtext subtext_error">{errors.name?.message}</span>
             </div>
             <div className="mb-10">
-                <label htmlFor="thumbnail">
-                    Превью: &nbsp;
-                    <span className="subtext">(превью изображения ингредиента):</span>
-                </label>
-                <div>
-                    <input id="thumbnail" type="file" {...register("thumbnail")} />
-                </div>
-            </div>
-            <div className="mb-10">
                 <label htmlFor="image">
                     Изображение: &nbsp;
                     <span className="subtext">(изображение ингредиента):</span>
                 </label>
                 <div>
                     <input id="image" type="file" {...register("image")} />
+                </div>
+            </div>
+            <div className="mb-10">
+                <label htmlFor="thumbnail">
+                    Превью: &nbsp;
+                    <span className="subtext">(превью изображения ингредиента):</span>
+                </label>
+                <div>
+                    <input id="thumbnail" type="file" {...register("thumbnail")} />
                 </div>
             </div>
             <button>Отправить</button>
