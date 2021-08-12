@@ -29,6 +29,7 @@ code {
   display: flex;
   height: 100%;
   width: 100%;
+  position: relative;
 }
 
 .content {
@@ -225,4 +226,34 @@ code {
 
 .edit-buttons button:last-of-type {
   margin-right: 0
+}
+
+.edit-form__preview {
+  overflow: hidden;
+  width: 80px;
+}
+
+.edit-form__preview img{
+  width: 100%;
+}
+
+.overlay {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  background: rgba(55, 58, 66, 0.56);
+}
+
+.modal {
+  background: #fff;
+  border-radius: 12px;
+  position: absolute;
+  padding: 12px 15px;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 320px;
 }
