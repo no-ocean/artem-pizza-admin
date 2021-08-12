@@ -29,3 +29,23 @@ export const postData = (data) => {
         body: formData,
     }).then(res => res.json());
 }
+
+export const updateData = (data, ingredientId) => {
+    const formData = new FormData();
+
+    for(let key in data) {
+        if( key === "image") {
+            formData.append(key, data[key][0], data[key][0].name)
+        } else if (key === "thumbnail") {
+            formData.append(key, data[key][0], data[key][0].name)
+        }
+        else {
+            formData.append(key, data[key])
+        }  
+    }
+
+    return fetch(`//localhost:4000/v1/ingredients/${ingredientId}`, {
+        method: "PUT",
+        body: formData,
+    }).then(res => res.json());
+}
