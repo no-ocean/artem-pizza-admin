@@ -49,3 +49,9 @@ export const updateData = (data, ingredientId) => {
         body: formData,
     }).then(res => res.json());
 }
+
+export const deleteData = (data, ingredientId) => {
+    return fetch(`//localhost:4000/v1/ingredients/${ingredientId}`, {
+        method: "DELETE"
+    }).then(res => res.json());
+}
