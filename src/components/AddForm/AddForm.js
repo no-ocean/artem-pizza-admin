@@ -1,9 +1,10 @@
-import { useState } from "react";
-import Loader from "react-loader-spinner";
-import { useForm } from "react-hook-form";
-import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { postData } from "../../api/api";
+import Loader from "react-loader-spinner";
+import Modal from "../Modal";
 
 const SUPPORTED_FORMATS = ["image/jpg", "image/jpeg", "image/png"];
 
@@ -55,7 +56,7 @@ const AddForm = ({handleCancel, handleSuccess}) => {
         }
 	};
 
-    const closeModal = () => {
+    const confirmSuccess = () => {
         setModal(false);
         handleSuccess();
     }
@@ -144,17 +145,17 @@ const AddForm = ({handleCancel, handleSuccess}) => {
                     </div>
                     <span className="subtext subtext_error">{errors.thumbnail?.message}</span>
                 </div>
-                <div className="edit-buttons">
+                <div className="buttons-row mt-30">
                     <button className="btn">Добавить</button>
                     <button onClick={handleCancel} className="btn">Отмена</button>
                 </div>
             </form>
-            {modal ? <div className="overlay">
-                <div className="modal">
-                    <p className="mb-20">Данные сохранены успешно!</p>
-                    <button className="btn" onClick={closeModal}>ОК</button>
-                </div>
-            </div> : null}
+            {
+                modal ? <Modal 
+                            message={"Данные успешно сохранены!"} 
+                            confirmHandler={confirmSuccess}
+                        /> : null
+            }
         </>
 	);
 }
