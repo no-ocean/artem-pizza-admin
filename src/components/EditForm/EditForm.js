@@ -1,9 +1,10 @@
-import { useState } from "react";
-import Loader from "react-loader-spinner";
-import { useForm } from "react-hook-form";
-import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import { updateData } from "../../api/api";
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { updateData, deleteData } from "../../api/api";
+import Loader from "react-loader-spinner";
+import Modal from "../Modal";
 
 const SUPPORTED_FORMATS = ["image/jpg", "image/jpeg", "image/png"];
 
@@ -36,8 +37,9 @@ const EditForm = ({handleCancel, handleSuccess, editData}) => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState();
     const [modal, setModal] = useState(false);
+    const [confirmModal, setConfirmModal] = useState(false);
 
-    const { id, name, slug, price, category, image, thumbnail } = editData;
+    const { id, name, slug, price, category } = editData;
 
 	const { register, handleSubmit, formState: {errors} } = useForm({
 		resolver: yupResolver(schema),
@@ -64,9 +66,33 @@ const EditForm = ({handleCancel, handleSuccess, editData}) => {
         }
 	};
 
-    const closeModal = () => {
+    const confirmDelete = async (data) => {
+        try {
+            setIsLoading(true);
+            await deleteData(data, id).then((res) => {
+                if(res) {
+                    setIsLoading(false);
+                    setConfirmModal(false);
+                    handleSuccess();
+                }
+            });
+        } catch (error) {
+            setError(error)
+            setIsLoading(false)
+        }
+	};
+
+    const declineDelete = () => {
+        setConfirmModal(false)
+    }
+
+    const confirmSuccess = () => {
         setModal(false);
         handleSuccess();
+    }
+
+    const openConfirmModal = () => {
+        setConfirmModal(true)
     }
 
     if (error) {
@@ -153,17 +179,21 @@ const EditForm = ({handleCancel, handleSuccess, editData}) => {
                     </div>
                     <span className="subtext subtext_error">{errors.thumbnail?.message}</span>
                 </div>
-                <div className="edit-buttons">
+                <div className="buttons-row mt-30">
                     <button className="btn">Сохранить</button>
+                    <button onClick={openConfirmModal} className="btn">Удалить</button>
                     <button onClick={handleCancel} className="btn">Отмена</button>
                 </div>
             </form>
-            {modal ? <div className="overlay">
-                <div className="modal">
-                    <p className="mb-20">Данные сохранены успешно!</p>
-                    <button className="btn" onClick={closeModal}>ОК</button>
-                </div>
-            </div> : null}
+            { modal ? <Modal 
+                message={"Данные успешно сохранены!"} 
+                confirmHandler={confirmSuccess}
+            /> : null }
+            { confirmModal ? <Modal 
+                message={"Удалить ингредиент?"} 
+                confirmHandler={confirmDelete}
+                declineHandler={declineDelete}
+            />  : null }
         </>
 	);
 }
