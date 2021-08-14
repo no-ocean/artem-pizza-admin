@@ -20,15 +20,11 @@ const App = () => {
 					<NavLink exact activeClassName="nav__link_active" className="nav__link" to="/">Главная</NavLink>
 					<NavLink activeClassName="nav__link_active" className="nav__link" to="/ingredients">Ингридиенты</NavLink>
 					<NavLink activeClassName="nav__link_active" className="nav__link" to="/orders">Заказы</NavLink>
-					<NavLink activeClassName="nav__link_active" className="nav__link" to="/addform">Добавить</NavLink>
 				</nav>
 				<div className="content">
 					<Switch>
 						<Route path="/ingredients">
 							<Ingredients />
-						</Route>
-						<Route path="/addform">
-							<AddForm />
 						</Route>
 						<Route path="/orders">
 							<Orders />
