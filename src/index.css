@@ -92,6 +92,18 @@ code {
   margin-bottom: 20px;
 }
 
+.ml-a {
+  margin-left: auto;
+}
+
+.mt-10 {
+  margin-top: 10px;
+}
+
+.mt-30 {
+  margin-top: 30px;
+}
+
 .btn {
   cursor: pointer;
   padding: 4px 8px;
@@ -211,20 +223,15 @@ code {
   font-size: 14px;
 }
 
-.edit-buttons {
-  margin-top: 50px;
-  margin-left: auto;
-}
-
-.edit-buttons button {
+.buttons-row button {
   margin: 0 5px;
 }
 
-.edit-buttons button:first-of-type {
+.buttons-row button:first-of-type {
   margin-left: 0
 }
 
-.edit-buttons button:last-of-type {
+.buttons-row button:last-of-type {
   margin-right: 0
 }
 
