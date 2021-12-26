@@ -16,14 +16,14 @@ const OrderItem = ({data}) => {
         return (
             <tr key={id}>
                 <td>{id}</td>
-                <td>{size} см</td>
+                <td><span className="nowrap">{size} см</span></td>
                 <td>{dough}</td>
                 <td>{sauce}</td>
                 <td>{ingredients.join(", ")}</td>
                 <td>{address}</td>
-                <td>{card_number}</td>
-                <td>{name}</td>
-                <td>{price} &#8381;</td>
+                <td><span className="nowrap">{card_number}</span></td>
+                <td><span className="nowrap">{name}</span></td>
+                <td><span className="nowrap">{price} &#8381;</span></td>
             </tr>
         )
     })

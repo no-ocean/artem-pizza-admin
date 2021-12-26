@@ -111,22 +111,27 @@ const Ingredients = () => {
 
     if(!editForm && !addForm) {
         return (
-            <div className="main flex-column">
-                <form className="flex flex-column">
-                    <div className="page grid">
-                        {items}
+            <div className="scrollbar">
+                <div className="content">
+                    <h1 className="page-title page-title__padded">Ингредиенты:</h1>
+                    <div className="flex-column">
+                        <form className="flex flex-column">
+                            <div className="grid">
+                                {items}
+                            </div>
+                        </form>
+                        <div className="buttons-row ml-a mt-30">
+                            <button 
+                                {...({disabled: btnFlag})} 
+                                onClick={handleEdit} 
+                                className="btn">Редактировать
+                            </button>
+                            <button 
+                                onClick={handleAdd}
+                                className="btn btn_primary">Создать
+                            </button>
+                        </div>
                     </div>
-                </form>
-                <div className="buttons-row ml-a mt-30">
-                    <button 
-                        {...({disabled: btnFlag})} 
-                        onClick={handleEdit} 
-                        className="btn">Редактировать
-                    </button>
-                    <button 
-                        onClick={handleAdd}
-                        className="btn">Создать
-                    </button>
                 </div>
             </div>
         )
